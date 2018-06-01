@@ -320,6 +320,9 @@ export default {
       } else if (this.format.indexOf('DD/MM/YYYY') === 0) {
         let arr = val.split('/')
         return new Date(arr[1] + '/' + arr[0] + '/' + arr[2])
+      } else if (this.format.indexOf('YYYY年MM月DD日') === 0) {
+        let arr = val.split(/[^\u0000-\u00FF]/)
+        return new Date(arr[2] + '/' + arr[1] + '/' + arr[0])
       } else{
         return new Date(val)
       }
@@ -402,7 +405,7 @@ export default {
       return this.months[this.monthIndex]
     },
     dateTime () {
-      return this.timeStamp.getFullYear() + '-' + (this.timeStamp.getMonth() + 1) + '-' + this.timeStamp.getUTCDay()
+    	return this.timeStamp.getFullYear() + '-' + (this.timeStamp.getMonth() + 1) + '-' + this.timeStamp.getUTCDay()
     },
     minutes () {
       let arr = []
@@ -432,7 +435,8 @@ export default {
         'YYYY-MM-DD', 'DD-MM-YYYY', 'MM-DD-YYYY',
         'YYYY/MM/DD', 'DD/MM/YYYY', 'MM/DD/YYYY', 'h:i:s', 'H:i:s',
         'YYYY/MM/DD h:i:s', 'DD/MM/YYYY h:i:s', 'MM/DD/YYYY h:i:s',
-        'YYYY/MM/DD H:i:s', 'DD/MM/YYYY H:i:s', 'MM/DD/YYYY H:i:s'
+        'YYYY/MM/DD H:i:s', 'DD/MM/YYYY H:i:s', 'MM/DD/YYYY H:i:s',
+        'YYYY年MM月DD日', 'YYYY年MM月DD日 H时i分', 'YYYY年MM月DD日 H时i分s秒'
       ]
       if (this.format) {
         f = this.format
@@ -446,7 +450,7 @@ export default {
       }
     },
     hideTime () {
-      return this.dateFormat.indexOf('h:i:s') === -1 && this.dateFormat.indexOf('H:i:s') === -1
+      return this.dateFormat.indexOf('h:i:s') === -1 && this.dateFormat.indexOf('H:i:s') === -1 && this.dateFormat.indexOf('H时i分') === -1
     },
     hideDate () {
       return this.dateFormat === 'h:i:s' || this.dateFormat === 'H:i:s'
@@ -462,8 +466,8 @@ export default {
   }
 
   input{
-    min-width: 226px;
-    width:100%;
+    min-width: 80px;
+    width:auto;
     height: 30px;
     padding: 3px;
     border: 1px solid #ddd;
@@ -471,6 +475,8 @@ export default {
   .datetime-picker{
     position: relative;
     display:inline-block;
+    min-width: 80px;
+    vertical-align: middle;
   }  
   .calender-div{
     width: 245px;
