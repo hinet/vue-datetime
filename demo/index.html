@@ -17,5 +17,13 @@
   <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
   <script type="text/javascript" src="./app.js"></script>
+  <script>
+    var vue = new Vue({
+    el: "#app",
+    components: {
+      "datetime": require("./demo.vue")
+    }
+  });
+  </script>
 </body>
 </html>
