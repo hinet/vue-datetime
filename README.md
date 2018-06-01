@@ -21,7 +21,6 @@ yarn add vue-datetime-selector
 <script>
     import datetime from 'vue-datetime-selector';
     export default {
-        props:{ taskid:String,department:String},
         data(){
             return{
                 defaultValue:null
@@ -33,3 +32,10 @@ yarn add vue-datetime-selector
 
 ## 格式化
 
+```javascript
+YYYY/MM/DD
+YYYY/MM/DD h:i:s //12小时制
+YYYY/MM/DD H:i:s //24小时制
+YYYY年MM月DD日
+YYYY年MM月DD日 H时i分s秒
+```
