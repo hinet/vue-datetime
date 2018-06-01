@@ -11,3 +11,25 @@ npm install vue-datetime-selector -s
 # 如果您使用yarn安装
 yarn add vue-datetime-selector
 ```
+
+# 使用
+
+```vue.js
+<template>
+  <datetime format="YYYY年MM月DD日 H时i分" v-model="defaultValue"></datetime>
+</template>
+<script>
+    import datetime from 'vue-datetime-selector';
+    export default {
+        props:{ taskid:String,department:String},
+        data(){
+            return{
+                defaultValue:null
+            }
+        }
+  }
+</script>
+```
+
+## 格式化
+
