@@ -16,12 +16,12 @@
   <script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
-  <script type="text/javascript" src="./app.js"></script>
-  <script>
+  <script type="text/ecmascript-6">
+    import datetime from './demo.vue'
     var vue = new Vue({
     el: "#app",
     components: {
-      "datetime": require("./demo.vue")
+      datetime
     }
   });
   </script>
