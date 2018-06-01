@@ -1,7 +1,7 @@
 <template>
   <div :style='{width:width}' class="datetime-picker"  v-on:click='calendarClicked($event)' >
     <div>
-      <input type='text' id='tj-datetime-input' :value="date"  :name='name' v-on:click='toggleCal' autocomplete='off'  />
+      <input type='text' id='tj-datetime-input' :value="date"  :name='name' v-on:click='toggleCal' autocomplete='off' :class="inputclass" />
       <div class='calender-div' :class='{noDisplay: hideCal}'>
         <div :class='{noDisplay: hideDate}'>
           <div class='year-month-wrapper'>
@@ -100,7 +100,8 @@ export default {
         }
       },
       message: 'Only 0 (Sunday) and 1 (Monday) are supported.'
-    }
+    },
+    inputclass:String
   },
   data () {
     return {
@@ -124,7 +125,7 @@ export default {
     }
   },
   methods: {
-	  leftMonth () {
+    leftMonth () {
       let index = this.months.indexOf(this.month)
       if (index === 0) {
         this.monthIndex = 11
@@ -239,11 +240,11 @@ export default {
         this.minuteSelectorVisible = false
         this.hourSelectorVisible = false
       }
-	  if (this.minuteSelectorVisible || this.hourSelectorVisible) {
-		event.preventDefault()
-		this.minuteSelectorVisible = false
+    if (this.minuteSelectorVisible || this.hourSelectorVisible) {
+    event.preventDefault()
+    this.minuteSelectorVisible = false
         this.hourSelectorVisible = false
-	  }
+    }
     },
     scrollTopMinute () {
       let mHeight = this.$refs.minuteScroller.scrollHeight
@@ -304,7 +305,7 @@ export default {
       d = d.replace('DD', this.day < 10 ? '0' + this.day : this.day)
       let m = this.monthIndex + 1
       d = d.replace('MM', m < 10 ? '0' + m : m)
-	    this.minute += ''
+      this.minute += ''
       d = d.replace(this.periodStyle === 24 ? 'H' : 'h', h.length < 2 ? '0' + h : '' + h )
       d = d.replace('i', this.minute.length < 2 ? '0' + this.minute : '' + this.minute)
       d = d.replace('s', '00')
@@ -322,20 +323,27 @@ export default {
         return new Date(arr[1] + '/' + arr[0] + '/' + arr[2])
       } else if (this.format.indexOf('YYYY年MM月DD日') === 0) {
         let arr = val.split(/[^\u0000-\u00FF]/)
-        return new Date(arr[2] + '/' + arr[1] + '/' + arr[0])
+        if (this.format.indexOf('H时i分') > 0){
+          return new Date(arr[1] + '/' + arr[2] + '/' + arr[0] + ' ' + arr[3].replace(/\s+/g,"") + ':' + arr[4] + ':' + arr[5])
+        }else if(this.format.indexOf('H时i分s秒') > 0){
+          return new Date(arr[1] + '/' + arr[2] + '/' + arr[0] + ' ' + arr[3].replace(/\s+/g,"") + ':' + arr[4])
+        }else{
+          return new Date(arr[1] + '/' + arr[2] + '/' + arr[0])
+        }
+        
       } else{
         return new Date(val)
       }
     }
   },
   created () {
-  	if (this.value) {
-  		try {
-  			this.timeStamp = this.makeDateObject(this.value)
-  		} catch (e) {
+    if (this.value) {
+      try {
+        this.timeStamp = this.makeDateObject(this.value)
+      } catch (e) {
         console.log(e);
-  		}
-  	}
+      }
+    }
     this.year = this.timeStamp.getFullYear()
     this.monthIndex = this.timeStamp.getMonth()
     this.day = this.timeStamp.getDate()
@@ -355,17 +363,22 @@ export default {
     value (newVal, oldVal) {
       if (newVal) {
         this.value = newVal;
-    		try {
-          this.timeStamp = this.makeDateObject(this.value)
-          let old = this.makeDateObject(oldVal)
-          if (oldVal === this.timeStamp) {
-            return
+        try {
+          if(newVal.indexOf('NaN') === 0){
+            this.timeStamp = new Date()
+          }else{
+            this.timeStamp = this.makeDateObject(this.value)
+            let old = this.makeDateObject(oldVal)
+            if (oldVal === this.timeStamp) {
+              return
+            }
           }
-    		} catch (e) {
+          
+        } catch (e) {
           console.warn(e.message +'. Current date is being used.');
           this.timeStamp = new Date()
-    		}
-    	}
+        }
+      }
       this.year = this.timeStamp.getFullYear()
       this.monthIndex = this.timeStamp.getMonth()
       this.day = this.timeStamp.getDate()
@@ -405,7 +418,7 @@ export default {
       return this.months[this.monthIndex]
     },
     dateTime () {
-    	return this.timeStamp.getFullYear() + '-' + (this.timeStamp.getMonth() + 1) + '-' + this.timeStamp.getUTCDay()
+      return this.timeStamp.getFullYear() + '-' + (this.timeStamp.getMonth() + 1) + '-' + this.timeStamp.getUTCDay()
     },
     minutes () {
       let arr = []
@@ -453,7 +466,7 @@ export default {
       return this.dateFormat.indexOf('h:i:s') === -1 && this.dateFormat.indexOf('H:i:s') === -1 && this.dateFormat.indexOf('H时i分') === -1
     },
     hideDate () {
-      return this.dateFormat === 'h:i:s' || this.dateFormat === 'H:i:s'
+      return this.dateFormat === 'h:i:s' || this.dateFormat === 'H:i:s' || this.dateFormat === 'H时i分'
     }
   }
 }
