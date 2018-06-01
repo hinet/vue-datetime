@@ -4,6 +4,8 @@ A Vue.js component implementing the datetime picker control using the bootstrap 
 
 【演示】 [vue-datetime-selector](https://hinet.github.io/vue-datetime-selector/demo/index.html)
 
+<img src="https://raw.githubusercontent.com/hinet/vue-datetime-selector/gh-pages/demo/20180601193636.png"/>
+
 # 安装
 
 ```shell
