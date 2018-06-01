@@ -628,16 +628,4 @@ export default {
   .noDisplay{
     display: none;
   }
-  .okButton{
-    color: #ed4d00;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 0;
-    float: right;
-    border: 0;
-    margin-right: 10px;
-    margin-top: 10px;
-    cursor: pointer;
-    background: transparent;
-  }
 </style>
