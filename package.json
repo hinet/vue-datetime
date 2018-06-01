@@ -1,5 +1,5 @@
 {
-  "name": "vue-datetime",
+  "name": "vue-datetime-selector",
   "description": "A Vue.js component implementing the datetime picker control using the bootstrap style.",
   "keywords": [
     "vue",
@@ -13,18 +13,15 @@
     "vue datetime picker"
   ],
   "version": "0.1.0",
-  "author": {
-    "name": "Hongfei",
-    "email": "63603636@qq.com"
-  },
-  "homepage": "https://github.com/hinet/vue-datetime",
+  "author": "Hongfei <63603636@qq.com>",
+  "homepage": "https://github.com/hinet/vue-datetime-selector",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:hinet/vue-datetime.git"
+    "url": "git+ssh://git@github.com/hinet/vue-datetime-selector.git"
   },
   "bugs": {
-    "url": "https://github.com/hinet/vue-datetime/issues"
+    "url": "https://github.com/hinet/vue-datetime-selector/issues"
   },
   "main": "./src/datetime.vue",
   "scripts": {
