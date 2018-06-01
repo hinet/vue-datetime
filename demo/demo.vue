@@ -5,6 +5,7 @@
 <script>
     import datetime from '../src/datetime';
     export default {
+      name: "DateTime",
       data(){
         return {
           val:null
